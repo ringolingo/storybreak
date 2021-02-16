@@ -218,7 +218,7 @@ function App() {
 
 
   const confirmDelete = () => {
-    if (confirm("are you sure you want to delete this story?")) {
+    if (window.confirm("are you sure you want to delete this story?")) {
         deleteWork();
     }
   }

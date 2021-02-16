@@ -131,7 +131,7 @@ const Corkboard = ({currentStoryId, backToDesk, addSceneCallback}) => {
     };
 
     const confirmDelete = () => {
-        if (confirm("are you sure you want to delete this scene?")) {
+        if (window.confirm("are you sure you want to delete this scene?")) {
             deleteCard();
         }
     }
