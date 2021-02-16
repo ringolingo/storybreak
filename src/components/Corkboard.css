@@ -3,18 +3,21 @@
     max-height: 80vh;
 }
 
-.corkboard__frame {
+/* .corkboard__frame {
     min-height: 70vh;
     max-height: 70vh;
     background-color: #9c6644;
-}
+} */
 
 .corkboard__board {
-    min-height: 65vh;
-    max-height: 65vh;
-    width: 100%;
+    /* min-height: 70vh;
+    max-height: 70vh; */
+    /* width: 100%; */
     overflow: auto;
-    background-color: blanchedalmond;
+    background-color: #e1bb80;
+    border-color: #352208;
+    border-width: 40px;
+    border-style: solid;
 }
 
 .corkboard__button-bar {

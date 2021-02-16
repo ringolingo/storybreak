@@ -1,12 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import Modal from 'react-bootstrap/Modal';
-import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
 import IndexCard from './IndexCard';
 import './Corkboard.css';
-// import { CardBody } from 'reactstrap';
 
 
 const Corkboard = ({currentStoryId, backToDesk, addSceneCallback}) => {
@@ -78,10 +76,6 @@ const Corkboard = ({currentStoryId, backToDesk, addSceneCallback}) => {
         setShowNewCardModal(true);
     }
 
-    // modal opens - user types in their summary - current event listener should handle that fine
-    // event listener just full on updates the entire card in state, does not just set summary in a separate state! cool
-    // do we need anything else before we dive into posting the card? don't think so
-    
     const saveNewCard = () => {
         const sceneBreakId = Math.random().toString(36).substring(2,10);
 
@@ -105,7 +99,6 @@ const Corkboard = ({currentStoryId, backToDesk, addSceneCallback}) => {
         addSceneCallback(newCard);
     };
 
-    // TODO refactor to send update to backend
     const changeCardSummary = (event) => {
         const updatedCard = {
             id: currentCard.id,
@@ -119,7 +112,6 @@ const Corkboard = ({currentStoryId, backToDesk, addSceneCallback}) => {
         setCurrentCard(updatedCard);
     };
 
-    // TODO - refactor to send changes to back end
     const saveCardChanges = () => {
         axios
             .put(`http://52.32.18.200/api/scenes/${currentCard.id}/`, currentCard)
@@ -279,9 +271,9 @@ const Corkboard = ({currentStoryId, backToDesk, addSceneCallback}) => {
 
     return (
         <div className="corkboard__wall rounded">
-            <div className="corkboard__frame rounded p-5 d-flex justify-content-center align-items-center">
-                <div className="corkboard__board d-flex flex-wrap justify-content-center p-2">{cardComponents}</div>
-            </div>
+            {/* <div className="corkboard__frame rounded p-5 d-flex justify-content-center align-items-center"> */}
+                <div className="corkboard__board d-flex flex-wrap justify-content-center p-2 w-85 h-85">{cardComponents}</div>
+            {/* </div> */}
 
             <div className="corkboard__button-bar d-flex justify-content-center">
                 <button onClick={openNewCard} className="btn btn-light-green rounded m-1">Add New Scene</button>
