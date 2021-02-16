@@ -130,6 +130,12 @@ const Corkboard = ({currentStoryId, backToDesk, addSceneCallback}) => {
         closeModal();
     };
 
+    const confirmDelete = () => {
+        if (confirm("are you sure you want to delete this scene?")) {
+            deleteCard();
+        }
+    }
+
     const deleteCard = () => {
         let mod = 0;
         const trimmedCards = [];
@@ -263,7 +269,7 @@ const Corkboard = ({currentStoryId, backToDesk, addSceneCallback}) => {
                     <button className="btn btn-light-green" onClick={saveCardChanges}>Save Changes</button> 
                     {currentCard.location === 0 ? null : <button className="btn btn-yellow" onClick={() => moveCard(-1)}>Move Scene Earlier</button>}
                     {currentCard.location === cards.length - 1 ? null : <button className="btn btn-yellow" onClick={() => moveCard(1)}>Move Scene Later</button>}
-                    <button onClick={deleteCard} className="btn btn-red">Delete Scene</button>
+                    <button onClick={confirmDelete} className="btn btn-red">Delete Scene</button>
                 </Modal.Footer>
             </Modal>
         )
@@ -272,7 +278,7 @@ const Corkboard = ({currentStoryId, backToDesk, addSceneCallback}) => {
     return (
         <div className="corkboard__wall rounded">
             {/* <div className="corkboard__frame rounded p-5 d-flex justify-content-center align-items-center"> */}
-                <div className="corkboard__board d-flex flex-wrap justify-content-center p-2 w-85 h-85">{cardComponents}</div>
+                <div className="corkboard__board d-flex flex-wrap justify-content-center p-2">{cardComponents}</div>
             {/* </div> */}
 
             <div className="corkboard__button-bar d-flex justify-content-center">

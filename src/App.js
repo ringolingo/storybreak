@@ -217,6 +217,12 @@ function App() {
   }
 
 
+  const confirmDelete = () => {
+    if (confirm("are you sure you want to delete this story?")) {
+        deleteWork();
+    }
+  }
+
   const deleteWork = () => {
     const trimmedStories = allStories.map((story) => {
       if (story.id !== currentStoryId) {
@@ -468,7 +474,7 @@ function App() {
                 <button onClick={saveExistingWork} className="btn btn-light-green rounded m-1">Save</button>
                 <button onClick={openNewScene} className="btn btn-yellow rounded m-1">Add New Scene</button>
                 <button onClick={openTitleChange} className="btn btn-yellow rounded m-1">Change Title</button>
-                <button onClick={deleteWork} className="btn btn-red rounded m-1">Delete Story</button>
+                <button onClick={confirmDelete} className="btn btn-red rounded m-1">Delete Story</button>
             </div>
     
             {changeTitleModal()}
