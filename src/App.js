@@ -3,7 +3,6 @@ import {Editor, EditorState, convertToRaw, convertFromRaw, Modifier, moveSelecti
 // import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
 import axios from 'axios';
 import Modal from 'react-bootstrap/Modal';
-import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
 import Corkboard from './components/Corkboard';
@@ -34,11 +33,7 @@ function App() {
   });
 
 
-  // app gets and remembers all stories
-  // useEffect(() => {
-  //   getStories();
-  // }, []);
-
+  // app gets and remembers all of a user's stories on login
   useEffect(() => {
     getStories();
   }, [user]);
@@ -105,7 +100,7 @@ function App() {
     )
     setCurrentStoryId(null);
     setCurrentStoryTitle('');
-    getStories();
+    // getStories();
   }
 
   const changeStory = () => {
@@ -116,8 +111,7 @@ function App() {
     )
   }
 
-   // TODO can I streamline this so there's just one modal for changing/making new title?
-   // ALSO TODO: updating the title saves it in the DB but doesn't trigger rerender so change doesn't show
+   // app lets user change the title of a story
   const openNewTitle = () => {
     setShowNewTitleModal(true);
   }
@@ -152,10 +146,7 @@ function App() {
     )
   }
 
-  // TODO update this to have the proper draft_raw content
-  // ...if any draft_raw, for that matter
-  // use editorstate get current content - raww - stingify?
-  // ALSO TODO have the new work spawn one scene immediately to start with
+  // app lets user create a new story
   const createNew = () => {
     setEditorState(
       () => EditorState.createEmpty(),
@@ -183,7 +174,7 @@ function App() {
   }
 
 
-  // app creates story links and shows them to user for user to pick
+  // app shows user links to all of their stories
   const generateTitles = allStories.map((story, i) => {
     return <div className="d-flex justify-content-center">
       <button className="btn story-list__title" key={i} id={story.id} onClick={selectStory} title={story.title}>
@@ -224,6 +215,7 @@ function App() {
   }
 
 
+  // app lets user delete a story
   const confirmDelete = () => {
     if (window.confirm("are you sure you want to delete this story?")) {
         deleteWork();
@@ -246,7 +238,8 @@ function App() {
     unselectStory();
   }
 
-  // app updates state and database according to the user's work
+
+  // app updates story in state as user writes, and in database when saved
   const onEditorChange = (editorState) => {
     setEditorState(editorState);
   };
@@ -274,7 +267,6 @@ function App() {
 
   // writer can create new scenes from either view
   const addSceneBlocks = (newScene) => {
-    console.log('addscenebreaks')
     // create new content block for scene break, unless first line in story
     let currentContent = editorState.getCurrentContent();
     let editorToUse = editorState;
@@ -286,12 +278,12 @@ function App() {
       selection = editorToUse.getSelection();
     }
     
-    // create the entity with the scene break id
+    // create an id to mark the beginning of a scene
     const sceneBreakId = newScene.entity_key;
     currentContent.createEntity('SCENE', 'IMMUTABLE', sceneBreakId);
     const entityKey = currentContent.getLastCreatedEntityKey();
     
-    // create the content block the entity will be associated with
+    // create a content block and attach the scene break id to it
     const textToUse = '***'
     const textWithEntity = Modifier.insertText(currentContent, selection, textToUse, null, entityKey);
     const updatedEditorState = EditorState.push(editorToUse, textWithEntity, 'insert-characters')
@@ -303,8 +295,8 @@ function App() {
   };
 
   const splitLine = (es=editorState) => {
-    // function makes sure that the new scene break is made on its own separate content block
-    // not attached to a preexisting content block, not attached to the next thing the user writes
+    // function makes a separate content blocks to go around scene break
+    // so it isn't attached to a preexisting content block or to the next thing the user writes
     const currentContent = es.getCurrentContent();
     const selection = es.getSelection();
     const newLine = Modifier.splitBlock(currentContent, selection)
@@ -313,7 +305,6 @@ function App() {
     return editorWithBreak
   }
 
-  
   const openNewScene = () => {
     setNewSceneSummary('');
     setShowNewSceneModal(true);
@@ -345,9 +336,9 @@ function App() {
     chainSaveFunction(newScene);
   }
 
-  const chainSaveFunction = async newScene => {
-    const editorWithSceneBlocks = await addSceneBlocks(newScene);
-    const savedWork = await saveWork(currentStoryTitle, editorWithSceneBlocks);
+  const chainSaveFunction = newScene => {
+    const editorWithSceneBlocks = addSceneBlocks(newScene);
+    const savedWork = saveWork(currentStoryTitle, editorWithSceneBlocks);
   }
   
   const newSceneModal = () => {
@@ -386,8 +377,6 @@ function App() {
     setAmendedTitle(event.target.value);
   }
 
-  // this makes it so new title shows up as desired on the button at top
-  // but old title still shows in list of all works until refresh
   const saveTitleChange = () => {
     saveWork(amendedTitle, editorState);
     setCurrentStoryTitle(amendedTitle);
@@ -429,10 +418,9 @@ function App() {
   }
 
 
-  // lets user switch between views
+  // app lets user switch between the writing view and the planning view
   const goToStoryBoard = () => {
-    // set cursor to end (selection to end/focus to end/w/e? so that scenes inserted in card view go to end)
-    // saveExistingWork()
+    // moves selection to end of state so new scenes made in corkboard will spawn at end of text
     const moveScenePoint = EditorState.moveSelectionToEnd(editorState);
     setEditorState(moveScenePoint);
     saveWork(currentStoryTitle, moveScenePoint)
@@ -458,8 +446,7 @@ function App() {
 
 
   // app displays the story the user wants to work on
-  // either as a writing desk
-  // or by rendering the corkboard component
+  // either as a writing desk, or as a corkboard
   const storyInProgressView = () => {
       if (inBoardView) {
         return (
@@ -489,6 +476,7 @@ function App() {
         )
       }
   }
+  
 
   return (
     <div className="site-body">
@@ -509,9 +497,13 @@ function App() {
         {newSceneModal()}
       </div>
 
-      <div className="sticky-bottom spring-green ada-footer">
+      {/* <div className="sticky-bottom spring-green ada-footer">
         <p>storybreak is a student project by Ringo Alcock, Ada Developers Academy, Cohort 14</p>
-      </div>
+      </div> */}
+      <footer className="sticky-bottom spring-green ada-footer">
+        <p>storybreak is a student project by Ringo Alcock, Ada Developers Academy, Cohort 14</p>
+      </footer>
+
     </div>
   );
 }

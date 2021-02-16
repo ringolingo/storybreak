@@ -20,7 +20,7 @@ const Corkboard = ({currentStoryId, backToDesk, addSceneCallback}) => {
         entity_key: '',
     });
 
-    // gets and remembers the scene cards associated with the current story
+    // app gets all active scenes associated with a story
     useEffect(() => {
         getScenes();
     }, []);
@@ -35,6 +35,7 @@ const Corkboard = ({currentStoryId, backToDesk, addSceneCallback}) => {
     }
     
 
+    // app lets user select a scene card to make changes on
     const popOutCard = (card) => {
         console.log('popoutcard')
         const selectedCard = {
@@ -47,6 +48,10 @@ const Corkboard = ({currentStoryId, backToDesk, addSceneCallback}) => {
         }
         setCurrentCard(selectedCard);
         setShowChangeCardModal(true);
+    }
+
+    const openNewCard = () => {
+        setShowNewCardModal(true);
     }
     
     const closeModal = () => {
@@ -62,6 +67,8 @@ const Corkboard = ({currentStoryId, backToDesk, addSceneCallback}) => {
         })
     }
 
+
+    // app takes the scene objects and renders them as cards
     const cardComponents = cards.map((card, i) => {
         card.story = parseInt(card.story)
         return (
@@ -72,10 +79,8 @@ const Corkboard = ({currentStoryId, backToDesk, addSceneCallback}) => {
         )
     });
 
-    const openNewCard = () => {
-        setShowNewCardModal(true);
-    }
 
+    // app lets users add scenes from the corkboard view
     const saveNewCard = () => {
         const sceneBreakId = Math.random().toString(36).substring(2,10);
 
@@ -99,6 +104,8 @@ const Corkboard = ({currentStoryId, backToDesk, addSceneCallback}) => {
         addSceneCallback(newCard);
     };
 
+
+    // app lets user change the scene summary
     const changeCardSummary = (event) => {
         const updatedCard = {
             id: currentCard.id,
@@ -130,6 +137,8 @@ const Corkboard = ({currentStoryId, backToDesk, addSceneCallback}) => {
         closeModal();
     };
 
+
+    // app lets user delete a scene from the corkboard
     const confirmDelete = () => {
         if (window.confirm("are you sure you want to delete this scene?")) {
             deleteCard();
@@ -166,6 +175,8 @@ const Corkboard = ({currentStoryId, backToDesk, addSceneCallback}) => {
         closeModal();
     }
 
+
+    // app lets user reorder scenes
     const moveCard = (mod) => {
         // prevents card from being moved outside the range of existing scenes
         if ((currentCard.location + mod >= cards.length) || (currentCard.location + mod < 0)) {
@@ -178,7 +189,7 @@ const Corkboard = ({currentStoryId, backToDesk, addSceneCallback}) => {
         
         // makes a new array of all scene objects
         // removes the active scene from the array
-        // adds teh active scene back in moved one place forward or backward
+        // adds the active scene back in moved one place forward or backward
         const shuffleCards = [...cards];
         shuffleCards.splice(currentCard.location, 1)
         shuffleCards.splice(currentCard.location + mod, 0, currentCard)
@@ -196,10 +207,10 @@ const Corkboard = ({currentStoryId, backToDesk, addSceneCallback}) => {
 
             return updateCard;
         });
-        // saves the reordered scenes with the correctly updated locations in state
+
+        // updates state for current card and all cards to match new order
         setCards(updateLocations);
 
-        // updates the currentCard object in state to have the correct location
         setCurrentCard({
             id: currentCard.id,
             card_summary: currentCard.card_summary,
