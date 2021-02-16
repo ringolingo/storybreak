@@ -100,6 +100,9 @@ function App() {
 
   // app lets user pick a different story or start a new story
   const unselectStory = () => {
+    useState(
+      () => EditorState.createEmpty(),
+    )
     setCurrentStoryId(null);
     setCurrentStoryTitle('');
     getStories();
@@ -154,6 +157,10 @@ function App() {
   // use editorstate get current content - raww - stingify?
   // ALSO TODO have the new work spawn one scene immediately to start with
   const createNew = () => {
+    useState(
+      () => EditorState.createEmpty(),
+    )
+
     if (amendedTitle === '') {
       closeNewTitle();
       return

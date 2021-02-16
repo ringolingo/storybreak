@@ -277,9 +277,9 @@ const Corkboard = ({currentStoryId, backToDesk, addSceneCallback}) => {
 
     return (
         <div className="corkboard__wall rounded">
-            {/* <div className="corkboard__frame rounded p-5 d-flex justify-content-center align-items-center"> */}
+            <div className="corkboard__frame rounded p-5 d-flex justify-content-center align-items-center">
                 <div className="corkboard__board d-flex flex-wrap justify-content-center p-2">{cardComponents}</div>
-            {/* </div> */}
+            </div>
 
             <div className="corkboard__button-bar d-flex justify-content-center">
                 <button onClick={openNewCard} className="btn btn-light-green rounded m-1">Add New Scene</button>

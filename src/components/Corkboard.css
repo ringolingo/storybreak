@@ -3,16 +3,15 @@
     max-height: 80vh;
 }
 
-/* .corkboard__frame {
+.corkboard__frame {
     min-height: 70vh;
     max-height: 70vh;
-    background-color: #9c6644;
-} */
+}
 
 .corkboard__board {
     min-height: 70vh;
     max-height: 70vh;
-    width: 85%;
+    width: 100%;
     overflow: auto;
     background-color: #e1bb80;
     border-color: #352208;
