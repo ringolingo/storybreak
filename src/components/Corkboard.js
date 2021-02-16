@@ -236,8 +236,8 @@ const Corkboard = ({currentStoryId, backToDesk, addSceneCallback}) => {
                 </Modal.Body>
             
                 <Modal.Footer>
-                    <button className="btn-yellow" onClick={closeModal}>Close</button>
-                    <button className="btn-light-green" onClick={saveNewCard}>Save New Scene</button>
+                    <button className="btn btn-yellow" onClick={closeModal}>Close</button>
+                    <button className="btn btn-light-green" onClick={saveNewCard}>Save New Scene</button>
                 </Modal.Footer>
             </Modal>
         )
@@ -267,10 +267,10 @@ const Corkboard = ({currentStoryId, backToDesk, addSceneCallback}) => {
                 </Modal.Body>
             
                 <Modal.Footer>
-                    <button className="btn-yellow" onClick={closeModal}>Close</button>
-                    <button className="btn-light-green" onClick={saveCardChanges}>Save Changes</button> 
-                    {currentCard.location === 0 ? null : <button className="btn-yellow" onClick={() => moveCard(-1)}>Move Scene Earlier</button>}
-                    {currentCard.location === cards.length - 1 ? null : <button className="btn-yellow" onClick={() => moveCard(1)}>Move Scene Later</button>}
+                    <button className="btn btn-yellow" onClick={closeModal}>Close</button>
+                    <button className="btn btn-light-green" onClick={saveCardChanges}>Save Changes</button> 
+                    {currentCard.location === 0 ? null : <button className="btn btn-yellow" onClick={() => moveCard(-1)}>Move Scene Earlier</button>}
+                    {currentCard.location === cards.length - 1 ? null : <button className="btn btn-yellow" onClick={() => moveCard(1)}>Move Scene Later</button>}
                     <button onClick={deleteCard} className="btn btn-red">Delete Scene</button>
                 </Modal.Footer>
             </Modal>

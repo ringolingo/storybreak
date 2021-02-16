@@ -66,9 +66,9 @@
   width: 100%;
   text-align: center;
   font-size: large;
-  padding: 8px 0px;
+  padding: 6px 0px;
   font-weight: bolder;
-  letter-spacing: 15px;
+  letter-spacing: 20px;
 }
 
 .site-body {
@@ -104,7 +104,7 @@
 }
 
 .ada-footer {
-  padding: 4px;
+  padding: 2px;
   text-align: center;
   font-size: small;
 }
