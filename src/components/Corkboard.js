@@ -267,11 +267,11 @@ const Corkboard = ({currentStoryId, backToDesk, addSceneCallback}) => {
                 </Modal.Body>
             
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={closeModal}>Close</Button>
-                    <Button variant="primary" onClick={saveCardChanges}>Save Changes</Button> 
-                    {currentCard.location === 0 ? null : <Button variant="info" onClick={() => moveCard(-1)}>Move Scene Earlier</Button>}
-                    {currentCard.location === cards.length - 1 ? null : <Button variant="info" onClick={() => moveCard(1)}>Move Scene Later</Button>}
-                    <Button variant="danger" onClick={deleteCard}>Delete Scene</Button>
+                    <Button className="btn-yellow" onClick={closeModal}>Close</Button>
+                    <Button className="btn-light-green" onClick={saveCardChanges}>Save Changes</Button> 
+                    {currentCard.location === 0 ? null : <Button className="btn-yellow" onClick={() => moveCard(-1)}>Move Scene Earlier</Button>}
+                    {currentCard.location === cards.length - 1 ? null : <Button className="btn-yellow" onClick={() => moveCard(1)}>Move Scene Later</Button>}
+                    <Button variant="danger" onClick={deleteCard} className="btn btn-red">Delete Scene</Button>
                 </Modal.Footer>
             </Modal>
         )
@@ -284,7 +284,7 @@ const Corkboard = ({currentStoryId, backToDesk, addSceneCallback}) => {
             </div>
 
             <div className="corkboard__button-bar d-flex justify-content-center">
-                <button onClick={openNewCard} className="btn btn-primary rounded m-1">Add New Scene</button>
+                <button onClick={openNewCard} className="btn btn-light-green rounded m-1">Add New Scene</button>
             </div>
 
             {changeCardModal()}

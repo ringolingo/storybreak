@@ -113,6 +113,14 @@
   background-color: #b7e4c7;
 }
 
+.btn-red {
+  background-color: #ef6351;
+}
+
+.btn-yellow {
+  background-color: #fdffb6;
+}
+
 * {
   font-family: Menlo, Monaco, Consolas, 'Courier New',
   monospace;

@@ -249,7 +249,7 @@ function App() {
 
     console.log('savework')
     axios
-        .put(`http://52.32.18.200/api/stories:80/${currentStoryId}/`, updatedWork)
+        .put(`http://52.32.18.200/api/stories/${currentStoryId}/`, updatedWork)
         .then(response => console.log(response.data))
         .catch(error => console.log(error.response));
   };
@@ -463,10 +463,10 @@ function App() {
             </div>
 
             <div className="writing-desk__button-bar d-flex flex-row justify-content-center">
-                <button onClick={saveExistingWork} className="btn btn-primary rounded m-1">Save</button>
-                <button onClick={openNewScene} className="btn btn-secondary rounded m-1">Add New Scene</button>
-                <button onClick={openTitleChange} className="btn btn-secondary rounded m-1">Change Title</button>
-                <button onClick={deleteWork} className="btn btn-danger rounded m-1">Delete Story</button>
+                <button onClick={saveExistingWork} className="btn btn-light-green rounded m-1">Save</button>
+                <button onClick={openNewScene} className="btn btn-yellow rounded m-1">Add New Scene</button>
+                <button onClick={openTitleChange} className="btn btn-yellow rounded m-1">Change Title</button>
+                <button onClick={deleteWork} className="btn btn-red rounded m-1">Delete Story</button>
             </div>
     
             {changeTitleModal()}
