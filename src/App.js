@@ -120,6 +120,7 @@ function App() {
   }
 
   const closeNewTitle = () => {
+    setAmendedTitle('');
     setShowNewTitleModal(false);
   }
 
@@ -140,9 +141,9 @@ function App() {
             </Modal.Body>
         
             <Modal.Footer>
-                <Button variant="primary" onClick={createNew}>
+                <button className="btn btn-light-green" onClick={createNew}>
                     Set Title
-                </Button>
+                </button>
             </Modal.Footer>
         </Modal>
     )
@@ -351,9 +352,9 @@ function App() {
             </Modal.Body>
         
             <Modal.Footer>
-                <Button variant="primary" onClick={saveNewScene}>
+                <button className="btn btn-light-green" onClick={saveNewScene}>
                     Make New Scene
-                </Button>
+                </button>
             </Modal.Footer>
         </Modal>
     )
@@ -405,12 +406,12 @@ function App() {
             </Modal.Body>
         
             <Modal.Footer>
-                <Button variant="secondary" onClick={closeTitleModal}>
+                <button className="btn btn-yellow" onClick={closeTitleModal}>
                     Close
-                </Button>
-                <Button variant="primary" onClick={saveTitleChange}>
+                </button>
+                <button className="btn btn-light-green" onClick={saveTitleChange}>
                     Save New Title
-                </Button>
+                </button>
             </Modal.Footer>
         </Modal>
     )
