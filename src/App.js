@@ -172,6 +172,7 @@ function App() {
 
     closeNewTitle();
     setAmendedTitle('');
+    openNewScene();
   }
 
 
@@ -235,8 +236,6 @@ function App() {
   // app updates state and database according to the user's work
   const onEditorChange = (editorState) => {
     setEditorState(editorState);
-    // const raw = convertToRaw(editorState.getCurrentContent())
-    // console.log(raw);
   };
 
   const saveWork = (title, es) => {
@@ -288,7 +287,6 @@ function App() {
     // create new content block for user's next input
     const editorWithSceneBlocks = splitLine(updatedEditorState);
     return editorWithSceneBlocks;
-    // saveExistingWork();
   };
 
   const splitLine = (es=editorState) => {
@@ -421,7 +419,10 @@ function App() {
   // lets user switch between views
   const goToStoryBoard = () => {
     // set cursor to end (selection to end/focus to end/w/e? so that scenes inserted in card view go to end)
-    saveExistingWork()
+    // saveExistingWork()
+    const moveScenePoint = EditorState.moveSelectionToEnd(editorState);
+    setEditorState(moveScenePoint);
+    saveWork(currentStoryTitle, moveScenePoint)
     setInBoardView(true);
   }
 
