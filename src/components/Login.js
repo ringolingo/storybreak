@@ -2,7 +2,7 @@ import React from 'react';
 import { GoogleLogin } from 'react-google-login'
 import axios from 'axios';
 
-const client_id = ""
+const clientId = "195198641210-o0725v1k4223tg8v6t5qep3dd463f5q6.apps.googleusercontent.com";
 
 const Login = ({setUser}) => {
     const onSuccess = (response) => {
