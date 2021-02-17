@@ -93,6 +93,7 @@
 .body-site {
   min-height: 85vh;
   max-height: 85vh;
+  overflow: auto;
 }
 
 .main-options-nav {
