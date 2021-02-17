@@ -42,6 +42,12 @@
   width: 80%;
 }
 
+.story-list__title-new {
+  display: block;
+  width: 80%;
+  margin: 0.5em;
+}
+
 .story-list__header {
   text-align: center;
 }

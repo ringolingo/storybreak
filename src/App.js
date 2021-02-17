@@ -190,7 +190,7 @@ function App() {
           <h4 className="story-list__header">hello, {user.first_name}, what would you like to write today?</h4>
           {generateTitles}
           <div className="d-flex justify-content-center">
-            <button className="btn story-list__title btn-light-green" onClick={openNewTitle}>Start A New Story</button>
+            <button className="btn story-list__title-new btn-light-green" onClick={openNewTitle}>Start A New Story</button>
           </div>
         </div>
       )
@@ -199,7 +199,7 @@ function App() {
         <div className="no-user-page__box d-flex flex-column justify-content-around">
           <div className="p-5">
             <h3 className="story-list__header no-user-page__title p-2">welcome to storybreak</h3>
-            <p className="text-center p-2">write and outline your stories in one simple, clean interface</p>
+            <p className="text-center story-list__header-subhead p-2">write and outline your stories in one simple, clean interface</p>
           </div>
           
           <div class="container p-5">
