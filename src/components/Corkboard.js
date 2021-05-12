@@ -27,7 +27,7 @@ const Corkboard = ({currentStoryId, backToDesk, addSceneCallback}) => {
     
     const getScenes = () => {
         axios
-            .get(`http://52.32.18.200/api/scenes/?story=${currentStoryId}`)
+            .get(`/api/scenes/?story=${currentStoryId}`)
             .then(response => {
                 setCards(response.data);
             })
@@ -92,7 +92,7 @@ const Corkboard = ({currentStoryId, backToDesk, addSceneCallback}) => {
         }
 
         axios
-            .post("http://52.32.18.200/api/scenes/", newCard)
+            .post("/api/scenes/", newCard)
             .then(response => console.log(response.data))
             .catch(error => console.log(error.response))
 
@@ -121,7 +121,7 @@ const Corkboard = ({currentStoryId, backToDesk, addSceneCallback}) => {
 
     const saveCardChanges = () => {
         axios
-            .put(`http://52.32.18.200/api/scenes/${currentCard.id}/`, currentCard)
+            .put(`/api/scenes/${currentCard.id}/`, currentCard)
             .then(response => console.log(response.data))
             .catch(error => console.log(error.response.data))
 
@@ -158,14 +158,14 @@ const Corkboard = ({currentStoryId, backToDesk, addSceneCallback}) => {
                 trimmedCards.push(updated)
 
                 axios
-                .put(`http://52.32.18.200/api/scenes/${updated.id}/`, updated)
+                .put(`/api/scenes/${updated.id}/`, updated)
                 .then(response => console.log(response.data))
                 .catch(error => console.log(error.response.data))
             } else {
                 // deletes the card we want deleted and tracks whether we've gotten to that card yet in our order
                 mod++;
                 axios
-                    .put(`http://52.32.18.200/api/scenes/${currentCard.id}/`, {...card, location: null})
+                    .put(`/api/scenes/${currentCard.id}/`, {...card, location: null})
                     .then(response => console.log(response.data))
                     .catch(error => console.log(error.response.data))
             }
@@ -201,7 +201,7 @@ const Corkboard = ({currentStoryId, backToDesk, addSceneCallback}) => {
             updateCard.location = index;
 
             axios
-                .put(`http://52.32.18.200/api/scenes/${updateCard.id}/`, updateCard)
+                .put(`/api/scenes/${updateCard.id}/`, updateCard)
                 .then(response => console.log(response.data))
                 .catch(error => console.log(error.response.data))
 

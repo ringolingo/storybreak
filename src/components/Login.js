@@ -2,7 +2,7 @@ import React from 'react';
 import { GoogleLogin } from 'react-google-login'
 import axios from 'axios';
 
-const clientId = "195198641210-o0725v1k4223tg8v6t5qep3dd463f5q6.apps.googleusercontent.com";
+const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID;
 
 const Login = ({setUser}) => {
     const onSuccess = (response) => {
@@ -14,7 +14,7 @@ const Login = ({setUser}) => {
             last_name: response.profileObj.familyName
         }
         axios
-            .post("http://52.32.18.200/api/users/", userData)
+            .post("/api/users/", userData)
             .then((response) => {
                 setUser(response.data);
             })
